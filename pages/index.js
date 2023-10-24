@@ -3,7 +3,8 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '../styles/Home.module.css'
 import Banner from '../components/Banner/Banner'
-
+import Navbar from '../components/Navbar/Navbar'
+import Card from '@/components/Card/Card'
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -17,8 +18,12 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         <div className={styles.description}>
-          <h1>Netflix</h1>
+          <Navbar userName="hadeersalah@gmail.com"/>
           <Banner title="clifford the red dog" subTitle="a redish dog" imgUrl="/public/static/clifford.webp"/>
+          <Card imgUrl='/static/clifford.webp' size="large"/>
+          <Card imgUrl='/static/clifford.webp' size="medium"/>
+          <Card imgUrl='/static/clifford.webp' size="small"/>
+
         </div>
       </main>
     </>
