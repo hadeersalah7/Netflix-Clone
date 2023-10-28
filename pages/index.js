@@ -1,13 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import styles from '../styles/Home.module.css'
 import Banner from '../components/Banner/Banner'
 import Navbar from '../components/Navbar/Navbar'
-import Card from '@/components/Card/Card'
-// const inter = Inter({ subsets: ['latin'] })
-
+import SectionCards from '@/components/Card/SectionCards'
+import {getVideos} from "@/lib/Videos"
 export default function Home() {
+  const movies = getVideos()
   return (
     <>
       <Head>
@@ -20,9 +18,12 @@ export default function Home() {
         <div className={styles.description}>
           <Navbar userName="hadeersalah@gmail.com"/>
           <Banner title="clifford the red dog" subTitle="a redish dog" imgUrl="/public/static/clifford.webp"/>
-          <Card imgUrl='/static/clifford.webp' size="large"/>
-          <Card imgUrl='/static/clifford.webp' size="medium"/>
-          <Card imgUrl='/static/clifford.webp' size="small"/>
+          <div className={styles.sectionWrapper}>
+            <SectionCards title="Movies & Series" videos = {movies} size="large"/>
+            <SectionCards title="Movies & Series" videos = {movies} size="medium"/>
+
+          </div>
+          
 
         </div>
       </main>
