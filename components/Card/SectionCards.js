@@ -1,7 +1,7 @@
 import Card from './Card'
 import styles from "./section-cards.module.css"
 function SectionCards(props) {
-    const { title, videos, size} = props
+    const { title, videos=[], size} = props
     console.log({videos})
   return (
     <section className={styles.container}>

@@ -4,8 +4,33 @@ import Banner from '../components/Banner/Banner'
 import Navbar from '../components/Navbar/Navbar'
 import SectionCards from '@/components/Card/SectionCards'
 import {getVideos} from "@/lib/Videos"
-export default function Home() {
-  const movies = getVideos()
+
+export async function getServerSideProps() {
+  const movies = await getVideos("dc trailer");
+  const productivity = await getVideos("productivity")
+  const travel = await getVideos("travel");
+  const popular = await getVideos("popular")
+
+//   return { props: { movies: movies || [],
+//      productivity: productivity || [],
+//      travel: travel || [],
+//      popular: popular || []}
+//  };
+return { props: { movies,
+  productivity,
+  travel,
+  popular}
+};
+
+ try {
+    return { props: { movies: movies || [] } };
+ } catch(error){
+  console.log(error.message)
+  return { props: { movies: [] }, error: 'Failed to fetch videos. Please try again later.' };
+ }
+}
+
+export default function Home({movies, productivity, travel, popular}) {
   return (
     <>
       <Head>
@@ -16,11 +41,13 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         <div className={styles.description}>
-          <Navbar userName="hadeersalah@gmail.com"/>
+          <Navbar userName="amunet@gmail.com"/>
           <Banner title="clifford the red dog" subTitle="a redish dog" imgUrl="/public/static/clifford.webp"/>
           <div className={styles.sectionWrapper}>
             <SectionCards title="Movies & Series" videos = {movies} size="large"/>
-            <SectionCards title="Movies & Series" videos = {movies} size="medium"/>
+            <SectionCards title="Travel" videos = {travel} size="small"/>
+            <SectionCards title="Productivity" videos = {productivity} size="medium"/>
+            <SectionCards title="Popular" videos = {popular} size="small"/>
 
           </div>
           
